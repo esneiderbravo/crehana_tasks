@@ -61,6 +61,11 @@ crehana_tasks/
 poetry install
 ```
 
+# Start the application, database and graphql containers (with Docker):
+```sh
+docker compose up --build
+```
+
 # Run database migrations:
 
 ```sh
