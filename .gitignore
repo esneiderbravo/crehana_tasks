@@ -1,0 +1,25 @@
+# Virtual environment created by Poetry
+.venv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Mypy type checker cache
+.mypy_cache/
+
+# Local environment files
+.env
+.env.*
+
+# Coverage reports
+.coverage
+htmlcov/
+
+# Pytest cache
+.cache/
+pytest_cache/
+
+# Log files
+*.log
