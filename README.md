@@ -51,7 +51,7 @@ crehana_tasks/
 
 1. **Clone the repository:**
    ```sh
-   git clone <repo-url>
+   git clone https://github.com/esneiderbravo/crehana_tasks.git
    cd crehana_tasks
    
 
