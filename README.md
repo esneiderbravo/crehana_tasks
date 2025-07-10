@@ -72,11 +72,6 @@ docker compose up --build
 alembic upgrade head
 ```
 
-# Start the application (with Docker):
-```sh
-docker compose up --build
-```
-
 # Running Tests
 
 ```sh
