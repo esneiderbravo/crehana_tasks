@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: crehana_db
+    environment:
+      POSTGRES_USER: crehana
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: crehana_tasks
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  postgraphile:
+    image: graphile/postgraphile
+    container_name: crehana_graphql
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+    environment:
+      PGUSER: crehana
+      PGPASSWORD: secret
+    command: >
+      --connection postgres://crehana:secret@db:5432/crehana_tasks
+      --schema public
+      --watch
+      --enhance-graphiql
+      --dynamic-json
+      --cors
+      --port 5000
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crehana_app
+    depends_on:
+      - db
+      - postgraphile
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgres://crehana:secret@db:5432/crehana_tasks
+      GRAPHQL_URL: http://postgraphile:5000/graphql
+
+volumes:
+  pgdata:

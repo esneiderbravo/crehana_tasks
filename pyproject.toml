@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "crehana-tasks"
+version = "0.1.0"
+description = "Crehana Tasks backend with FastAPI and PostGraphile integration"
+authors = ["Esneider Bravo esneiderbravoyb@gmail.com"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.111.0"
+uvicorn = "^0.30.0"
+python-dotenv = "^1.0.1"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-jose = "^3.5.0"
+pyjwt = "^2.10.1"
+psycopg2-binary = "^2.9.10"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.2"
+pytest-cov = "^5.0.0"
+black = "^24.4.2"
+flake8 = "^7.0.0"
+isort = "^5.13.2"
+mypy = "^1.10.0"
+alembic = "^1.16.3"
+pytest-asyncio = "^1.0.0"
+httpx = "^0.28.1"
+asgi-lifespan = "^2.1.0"
+pylint = "^3.3.7"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
