@@ -55,7 +55,6 @@ def require_authentication(fn):
             if not user_id:
                 raise HTTPException(status_code=401, detail="Invalid token payload")
 
-            # Inject user into kwargs so it can be accessed inside the handler
             kwargs["current_user"] = {"user_id": user_id, "email": email}
 
         except JWTError:

@@ -1,5 +1,3 @@
-# src/main.py
-
 from fastapi import FastAPI
 from src.api import users_router
 from src.api.task_lists_router import router as task_lists_router

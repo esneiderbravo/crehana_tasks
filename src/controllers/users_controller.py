@@ -1,8 +1,6 @@
-# src/controllers/users_controller.py
 
 from pydantic import EmailStr
-from src.infrastructure.graphql_client import execute_graphql
-from src.application.auth import verify_password, create_access_token, hash_password
+from src.application.auth import verify_password, create_access_token
 from src.services.user_graphql import check_existing_users_by_email, create_user_graphql
 
 
