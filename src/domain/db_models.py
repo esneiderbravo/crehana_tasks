@@ -38,13 +38,9 @@ task_list_table = Table(
     Column("created_at", TIMESTAMP, server_default=func.now()),
 )
 
-task_priority_enum = Enum(
-    "low", "medium", "high", name="task_priority", metadata=metadata
-)
+task_priority_enum = Enum("low", "medium", "high", name="task_priority", metadata=metadata)
 
-task_status_enum = Enum(
-    "pending", "in_process", "completed", name="task_status", metadata=metadata
-)
+task_status_enum = Enum("pending", "in_process", "completed", name="task_status", metadata=metadata)
 
 task_table = Table(
     "task",

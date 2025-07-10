@@ -20,9 +20,7 @@ class TaskListController:
         """
         task_list_data = await get_task_lists_by_id_graphql(task_list_id)
         if not task_list_data or "errors" in task_list_data:
-            raise HTTPException(
-                status_code=404, detail="Task list not found or invalid ID."
-            )
+            raise HTTPException(status_code=404, detail="Task list not found or invalid ID.")
 
         task_list_data = task_list_data.get("data", {}).get("taskListById", {})
         if not task_list_data:
@@ -70,9 +68,7 @@ class TaskListController:
         return await delete_task_list_graphql(task_list_id)
 
     @staticmethod
-    async def fetch_task_lists_with_tasks_and_filters(
-        task_list_id: str, filters: dict = None
-    ):
+    async def fetch_task_lists_with_tasks_and_filters(task_list_id: str, filters: dict = None):
         """
         Fetch all task lists with their tasks.
         :param task_list_id: ID of the task list to fetch tasks for.

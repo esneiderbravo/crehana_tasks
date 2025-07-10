@@ -1,4 +1,3 @@
-
 from pydantic import EmailStr
 from src.application.auth import verify_password, create_access_token
 from src.services.user_graphql import check_existing_users_by_email, create_user_graphql
@@ -9,7 +8,8 @@ class UserController:
     async def register_user(user_data: dict):
         """
         Register a new user by checking if the email already exists and then creating the user.
-        :param user_data: Dictionary containing user data with keys 'email', 'password', and 'full_name'.
+        :param user_data: Dictionary containing user data with keys
+        'email', 'password', and 'full_name'.
         :return: Dictionary with either an error message or the created user data.
         """
         existing_users = await check_existing_users_by_email(user_data["email"])
@@ -25,7 +25,8 @@ class UserController:
         Login a user by checking the email and password.
         :param email: Email address of the user.
         :param password: Password of the user.
-        :return: Dictionary with access token and user data if login is successful, otherwise an error message.
+        :return: Dictionary with access token and user data if
+        login is successful, otherwise an error message.
         """
 
         existing_users = await check_existing_users_by_email(email)

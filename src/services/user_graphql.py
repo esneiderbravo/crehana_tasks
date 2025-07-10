@@ -31,7 +31,8 @@ async def create_user_graphql(user_data: dict):
     """
     Create a new user using GraphQL.
     This function hashes the password and sends a mutation to create a user.
-    :param user_data: Dictionary containing user data with keys 'email', 'password', and 'full_name'.
+    :param user_data: Dictionary containing user data with keys
+    'email', 'password', and 'full_name'.
     :return: Result of the GraphQL mutation.
     """
     password = user_data["password"]

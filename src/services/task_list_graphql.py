@@ -89,9 +89,7 @@ async def delete_task_list_graphql(task_list_id: str):
     return await execute_graphql(query, {"id": task_list_id})
 
 
-async def get_task_list_with_task_with_filters_graphql(
-    task_list_id: str, filters: dict = None
-):
+async def get_task_list_with_task_with_filters_graphql(task_list_id: str, filters: dict = None):
     """
     Fetch a task list along with its tasks by the task list ID using GraphQL.
     :param task_list_id: ID of the task list to be fetched.

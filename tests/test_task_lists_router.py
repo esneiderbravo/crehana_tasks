@@ -40,16 +40,12 @@ class TestTaskListsRouter:
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
         assert "name" in response.text
 
-    @patch(
-        "src.controllers.task_lists_controller.TaskListController.fetch_task_list_by_id"
-    )
+    @patch("src.controllers.task_lists_controller.TaskListController.fetch_task_list_by_id")
     async def test_fetch_task_list_success(self, mock_fetch, test_app):
         """
         Test fetching a task list by ID successfully.
         """
-        mock_fetch.return_value = {
-            "data": {"taskListById": {"id": "123", "name": "Work"}}
-        }
+        mock_fetch.return_value = {"data": {"taskListById": {"id": "123", "name": "Work"}}}
 
         transport = ASGITransport(app=test_app)
         async with AsyncClient(transport=transport, base_url="http://test") as ac:
@@ -62,17 +58,13 @@ class TestTaskListsRouter:
     @patch("src.controllers.task_lists_controller.TaskListController.update_task_list")
     async def test_update_task_list_success(self, mock_update, test_app):
         mock_update.return_value = {
-            "data": {
-                "updateTaskListById": {"taskList": {"id": "123", "name": "Updated"}}
-            }
+            "data": {"updateTaskListById": {"taskList": {"id": "123", "name": "Updated"}}}
         }
 
         payload = {"name": "Updated"}
         transport = ASGITransport(app=test_app)
         async with AsyncClient(transport=transport, base_url="http://test") as ac:
-            response = await ac.put(
-                "/task-lists/123", json=payload, headers=self.HEADERS
-            )
+            response = await ac.put("/task-lists/123", json=payload, headers=self.HEADERS)
 
         assert response.status_code == status.HTTP_200_OK
         assert response.json()["name"] == "Updated"
@@ -81,18 +73,14 @@ class TestTaskListsRouter:
         payload = {"name": " "}
         transport = ASGITransport(app=test_app)
         async with AsyncClient(transport=transport, base_url="http://test") as ac:
-            response = await ac.put(
-                "/task-lists/123", json=payload, headers=self.HEADERS
-            )
+            response = await ac.put("/task-lists/123", json=payload, headers=self.HEADERS)
 
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
         assert "name" in response.text
 
     @patch("src.controllers.task_lists_controller.TaskListController.delete_task_list")
     async def test_delete_task_list_success(self, mock_delete, test_app):
-        mock_delete.return_value = {
-            "data": {"deleteTaskListById": {"deletedTaskListId": "123"}}
-        }
+        mock_delete.return_value = {"data": {"deleteTaskListById": {"deletedTaskListId": "123"}}}
 
         transport = ASGITransport(app=test_app)
         async with AsyncClient(transport=transport, base_url="http://test") as ac:
@@ -103,9 +91,7 @@ class TestTaskListsRouter:
 
     @patch("src.controllers.task_lists_controller.TaskListController.delete_task_list")
     async def test_delete_task_list_not_found(self, mock_delete, test_app):
-        mock_delete.return_value = {
-            "data": {"deleteTaskListById": {"deletedTaskListId": ""}}
-        }
+        mock_delete.return_value = {"data": {"deleteTaskListById": {"deletedTaskListId": ""}}}
 
         transport = ASGITransport(app=test_app)
         async with AsyncClient(transport=transport, base_url="http://test") as ac:
@@ -139,9 +125,7 @@ class TestTaskListsRouter:
 
         transport = ASGITransport(app=test_app)
         async with AsyncClient(transport=transport, base_url="http://test") as ac:
-            response = await ac.get(
-                "/task-lists/123/tasks?status=pending", headers=self.HEADERS
-            )
+            response = await ac.get("/task-lists/123/tasks?status=pending", headers=self.HEADERS)
 
         assert response.status_code == status.HTTP_200_OK
         assert response.json()[0]["id"] == "t1"

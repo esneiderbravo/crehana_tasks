@@ -39,7 +39,8 @@ async def login_user(user: UserLogin):
     """
     Login a user with email and password.
     :param user: UserLogin model containing email and password.
-    :return: Dictionary with access token and user data if login is successful, otherwise raises HTTPException.
+    :return: Dictionary with access token and user data if login
+    is successful, otherwise raises HTTPException.
     """
     result = await UserController.login_user(user.email, user.password)
 

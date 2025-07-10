@@ -6,7 +6,8 @@ async def create_task_graphql(
 ):
     """
     Create a new task using GraphQL.
-    :param task_data: Dictionary containing task data with keys 'name', 'description', 'due_date', and 'task_list_id'.
+    :param task_data: Dictionary containing task data with keys
+    'name', 'description', 'due_date', and 'task_list_id'.
     :return: Result of the GraphQL mutation.
     """
     query = """

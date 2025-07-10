@@ -123,14 +123,8 @@ async def delete_task_list(
         if "errors" in result:
             raise HTTPException(status_code=400, detail=result["errors"])
 
-        if (
-            not result.get("data", {})
-            .get("deleteTaskListById", {})
-            .get("deletedTaskListId", "")
-        ):
-            raise HTTPException(
-                status_code=404, detail="Task list not found or already deleted."
-            )
+        if not result.get("data", {}).get("deleteTaskListById", {}).get("deletedTaskListId", ""):
+            raise HTTPException(status_code=404, detail="Task list not found or already deleted.")
 
         return {"message": "Task list deleted successfully."}
 

@@ -16,7 +16,7 @@ class TestUsersRouter:
                         "id": "123",
                         "email": "test@example.com",
                         "firstName": "Test",
-                        "lastName": "User"
+                        "lastName": "User",
                     }
                 }
             }
@@ -25,7 +25,7 @@ class TestUsersRouter:
         payload = {
             "email": "test@example.com",
             "password": "Password123!",
-            "full_name": "Test User"
+            "full_name": "Test User",
         }
 
         transport = ASGITransport(app=test_app)
@@ -39,14 +39,12 @@ class TestUsersRouter:
 
     @patch("src.controllers.users_controller.UserController.register_user")
     async def test_register_user_existing_email(self, mock_register, test_app):
-        mock_register.return_value = {
-            "error": "Email is already registered."
-        }
+        mock_register.return_value = {"error": "Email is already registered."}
 
         payload = {
             "email": "existing@example.com",
             "password": "Password123!",
-            "full_name": "Test User"
+            "full_name": "Test User",
         }
 
         transport = ASGITransport(app=test_app)
@@ -57,11 +55,7 @@ class TestUsersRouter:
         assert "Email is already registered" in response.text
 
     async def test_register_user_invalid_email(self, test_app):
-        payload = {
-            "email": "invalid-email",
-            "password": "Password123!",
-            "full_name": "Test User"
-        }
+        payload = {"email": "invalid-email", "password": "Password123!", "full_name": "Test User"}
 
         transport = ASGITransport(app=test_app)
         async with AsyncClient(transport=transport, base_url="http://test") as ac:
@@ -75,17 +69,10 @@ class TestUsersRouter:
         mock_login.return_value = {
             "access_token": "valid.jwt.token",
             "token_type": "bearer",
-            "user": {
-                "id": "123",
-                "email": "test@example.com",
-                "full_name": "Test User"
-            }
+            "user": {"id": "123", "email": "test@example.com", "full_name": "Test User"},
         }
 
-        payload = {
-            "email": "test@example.com",
-            "password": "Password123!"
-        }
+        payload = {"email": "test@example.com", "password": "Password123!"}
 
         transport = ASGITransport(app=test_app)
         async with AsyncClient(transport=transport, base_url="http://test") as ac:
@@ -97,14 +84,9 @@ class TestUsersRouter:
 
     @patch("src.controllers.users_controller.UserController.login_user")
     async def test_login_user_invalid_credentials(self, mock_login, test_app):
-        mock_login.return_value = {
-            "error": "Invalid credentials"
-        }
+        mock_login.return_value = {"error": "Invalid credentials"}
 
-        payload = {
-            "email": "test@example.com",
-            "password": "WrongPassword"
-        }
+        payload = {"email": "test@example.com", "password": "WrongPassword"}
 
         transport = ASGITransport(app=test_app)
         async with AsyncClient(transport=transport, base_url="http://test") as ac:

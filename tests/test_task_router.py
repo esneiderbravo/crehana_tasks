@@ -125,9 +125,7 @@ class TestTasksRouter:
 
     @patch("src.controllers.task_controller.TaskController.delete_task")
     async def test_delete_task_success(self, mock_delete, test_app):
-        mock_delete.return_value = {
-            "data": {"deleteTaskById": {"deletedTaskId": "123"}}
-        }
+        mock_delete.return_value = {"data": {"deleteTaskById": {"deletedTaskId": "123"}}}
 
         transport = ASGITransport(app=test_app)
         async with AsyncClient(transport=transport, base_url="http://test") as ac:
@@ -168,9 +166,7 @@ class TestTasksRouter:
 
         transport = ASGITransport(app=test_app)
         async with AsyncClient(transport=transport, base_url="http://test") as ac:
-            response = await ac.put(
-                "/tasks/123/status", json=payload, headers=self.HEADERS
-            )
+            response = await ac.put("/tasks/123/status", json=payload, headers=self.HEADERS)
 
         assert response.status_code == status.HTTP_200_OK
         assert response.json()["status"] == "completed"
@@ -198,9 +194,7 @@ class TestTasksRouter:
 
         transport = ASGITransport(app=test_app)
         async with AsyncClient(transport=transport, base_url="http://test") as ac:
-            response = await ac.post(
-                "/tasks/assign", json=payload, headers=self.HEADERS
-            )
+            response = await ac.post("/tasks/assign", json=payload, headers=self.HEADERS)
 
         assert response.status_code == status.HTTP_200_OK
         assert response.json()["id"] == "123"
@@ -214,9 +208,7 @@ class TestTasksRouter:
 
         transport = ASGITransport(app=test_app)
         async with AsyncClient(transport=transport, base_url="http://test") as ac:
-            response = await ac.post(
-                "/tasks/assign", json=payload, headers=self.HEADERS
-            )
+            response = await ac.post("/tasks/assign", json=payload, headers=self.HEADERS)
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert "Task or user not found" in response.text

@@ -31,7 +31,8 @@ class TaskController:
     async def create_task(task_data: dict):
         """
         Create a new task.
-        :param task_data: Dictionary containing task data with keys 'title', 'priority', 'status', 'completed_percentage', and 'task_list_id'.
+        :param task_data: Dictionary containing task data with
+        keys 'title', 'priority', 'status', 'completed_percentage', and 'task_list_id'.
         :return: A JSON response containing the created task.
         """
         return await create_task_graphql(task_data)

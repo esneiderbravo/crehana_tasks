@@ -96,14 +96,8 @@ async def delete_task(task_id: str, request: Request, current_user: dict = None)
         if "errors" in result:
             raise HTTPException(status_code=404, detail=result["errors"])
 
-        if (
-            not result.get("data", {})
-            .get("deleteTaskById", {})
-            .get("deletedTaskId", "")
-        ):
-            raise HTTPException(
-                status_code=404, detail="Task list not found or already deleted."
-            )
+        if not result.get("data", {}).get("deleteTaskById", {}).get("deletedTaskId", ""):
+            raise HTTPException(status_code=404, detail="Task list not found or already deleted.")
 
         return {"message": "Task deleted successfully."}
 
