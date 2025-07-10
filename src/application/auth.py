@@ -1,9 +1,8 @@
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
-import jwt
 from functools import wraps
 from fastapi import HTTPException, Request, status
-from jose import JWTError
+from jose import jwt, JWTError
 
 SECRET_KEY = "super-secret"
 ALGORITHM = "HS256"
